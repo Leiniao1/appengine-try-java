@@ -25,3 +25,7 @@ function foodcolor() {
     }
     return color
 }    
+
+function anima() {
+    requestAnimationFrame(anima)
+}
