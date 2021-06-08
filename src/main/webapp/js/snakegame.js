@@ -3,6 +3,7 @@ var t = new Date + "",
     canvas_context = canvas_whole.getContext("2d"),
     h = innerHeight,
     w = innerWidth,
+    timeout_millsecond = 50,
     food_array = [];
 key = {}, key.keydown = function (t) {
     var event = document.createEvent("KeyboardEvent");
@@ -32,6 +33,9 @@ function timer() {
 
 function init() {
     canvas_whole.height = h, canvas_whole.width = w;
+    canvas_context.fillRect(0, 0, w, innerHeight);
+    for (var food_index = 0; food_index < 10; food_index++) food_array.push(new food);
+    
 }
 
 function foodcolor() {
@@ -53,5 +57,9 @@ function food() {
 }
 
 function anima() {
-    requestAnimationFrame(anima)
+    canvas_context.fillStyle = "rgba(0, 0, 0, 0.12)", canvas_context.fillRect(0, 0, canvas_whole.width, canvas_whole.height),
+        food_array.forEach(target => target.put()), document.getElementById("time").innerText = timer(), setTimeout(
+        () => {requestAnimationFrame(anima)}, timeout_millsecond)
+    )
+    
 }
