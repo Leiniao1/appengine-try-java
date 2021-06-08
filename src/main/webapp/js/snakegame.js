@@ -60,6 +60,5 @@ function anima() {
     canvas_context.fillStyle = "rgba(0, 0, 0, 0.12)", canvas_context.fillRect(0, 0, canvas_whole.width, canvas_whole.height),
         food_array.forEach(target => target.put()), document.getElementById("time").innerText = timer(), setTimeout(
         () => {requestAnimationFrame(anima)}, timeout_millsecond)
-    )
     
 }
