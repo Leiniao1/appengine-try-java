@@ -3,6 +3,7 @@ var t = new Date + "",
     canvas_context = canvas_whole.getContext("2d"),
     h = innerHeight,
     w = innerWidth,
+    d = void 0,
     timeout_millsecond = 50,
     food_array = [];
 
@@ -67,10 +68,24 @@ function food() {
     })
 }
 
+function coll(t, e) {
+    return t.x < e.x + e.w && t.x + t.w > e.x && t.y < e.y + e.h && t.y + t.h > e.y
+}
+
 function snake() {
     this.w = 15, this.h = 15, this.dx = 1, this.dy = 1, this.snake_body = [];
     for (var t = {x: w/2, y: h/2}, e = 0; e < 5; e++) this.snake_body.push(Object.assign({}, t), t.x += this.w;)
     this.draw = function() {
+        var t = d && d.search("Arrow") > -1, e = -1;
+        if (t) {
+            if ("ArrowUp" == d && (i.y -= this.h), "ArrowDown" == d && (i.y += this.h), "ArrowLeft" == d && (i.x -= this.w), "ArrowRight" == d && (i.x += this.w)) {
+            }
+            food_array.findIndex( t => coll( {
+                ...this.snake_body[0],
+                h: this.h,
+                w: this.w
+            }, t))
+        }
         this.snake_body.forEach((t, e, i) => {
             canvas_context.fillRect(t.x, t.y, this.w, this.h), canvas_context.strokeStyle = "#E91E00", 
         })
