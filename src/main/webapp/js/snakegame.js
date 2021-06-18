@@ -5,6 +5,7 @@ var t = new Date + "",
     w = innerWidth,
     timeout_millsecond = 50,
     food_array = [];
+
 key = {}, key.keydown = function (t) {
     var event = document.createEvent("KeyboardEvent");
     Object.defineProperty(event, "keyCode", {
@@ -15,8 +16,18 @@ key = {}, key.keydown = function (t) {
       get: function () {
           return this.keyCodeVal == 37 ? "ArrowLeft" : this.keyCodeVal == 38 ? "ArrowUp" : this.keyCodeVal == 39 ? "ArrowRight" : this.keyCodeVal == 40 ? "ArrowDown" : "ArrowUnknown"
       }
-    });
+    }), event.initKeyboardEvent ? event.initKeyboardEvent("keydown", !0, !0, document.defaultView, !1, !1, !1, !1, !1, !1) : alert("keyCode mismatch " + event.keyCode + ".")
+};
 
+window.onkeydown = function (t) {
+    var event = t.key;
+    ("i" != event && "I" != event || timeout_millsecond -= 10), ("d" != event && "D" != event || timeout_millsecond += 10);
+}
+
+init();
+
+function emit(t) {
+    key.keydown(t)
 }
 
 function timer() {
@@ -54,6 +65,16 @@ function food() {
         canvas_context.fillStyle = this.color;
         canvas_context.fillRect(this.x, this.y, this.w, this.h);
     })
+}
+
+function snake() {
+    this.w = 15, this.h = 15, this.dx = 1, this.dy = 1, this.snake_body = [];
+    for (var t = {x: w/2, y: h/2}, e = 0; e < 5; e++) this.snake_body.push(Object.assign({}, t), t.x += this.w;)
+    this.draw = function() {
+        this.snake_body.forEach((t, e, i) => {
+            canvas_context.fillRect(t.x, t.y, this.w, this.h), canvas_context.strokeStyle = "#E91E00", 
+        })
+    }
 }
 
 function anima() {
