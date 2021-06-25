@@ -15,31 +15,31 @@ function coll(t, e) {
 }
 
 function snake() {
-    this.w = 15, this.h = 15, this.dx = 1, this.dy = 1, this.xf = 1, this.yf = 1, this.snake_body = [];
+    this.w = 15, this.h = 15, this.dx = 1, this.dy = 1, this.xf = 1, this.yf = 1, this.sn = [];
     for (var t = {
         x: w / 2,
         y: h / 2
-    }, e = 0; e < 5; e++) this.snake_body.push(Object.assign({}, t)), t.x += this.w;
+    }, e = 0; e < 5; e++) this.sn.push(Object.assign({}, t)), t.x += this.w;
     this.draw = function () {
         var t = d && d.search("Arrow") > -1,
             e = -1;
         if (t) {
             var i = {
-                ...this.snake_body[0]
+                ...this.sn[0]
             };
-            if ("ArrowUp" == d && (i.y -= this.h), "ArrowDown" == d && (i.y += this.h), "ArrowLeft" == d && (i.x -= this.w), "ArrowRight" == d && (i.x += this.w), i.x >= w ? i.x = 0 : i.x < 0 && (i.x = w - this.w), i.y > h ? i.y = 0 : i.y < 0 && (i.y = h), e = fa.findIndex(t => coll({
-                ...this.snake_body[0],
+            if ("ArrowUp" == d && (i.y -= this.h), "ArrowDown" == d && (i.y += this.h), "ArrowLeft" == d && (i.x -= this.w), "ArrowRight" == d && (i.x += this.w), i.x >= w ? i.x = 0 : i.x < 0 && (i.x = w - this.w), i.y > h ? i.y = 0 : i.y < 0 && (i.y = h), e = food_array.findIndex(t => coll({
+                ...this.sn[0],
                 h: this.h,
                 w: this.w
-            }, t)), this.snake_body.unshift(i), -1 != e) return console.log(e), fa[e].renew(), void (document.getElementById("score").innerText = Number(document.getElementById("score").innerText) + 1);
-            this.snake_body.pop(), console.log(6)
+            }, t)), this.sn.unshift(i), -1 != e) return console.log(e), food_array[e].renew(), void (document.getElementById("score").innerText = Number(document.getElementById("score").innerText) + 1);
+            this.sn.pop(), console.log(6)
         }
-        this.snake_body.forEach((t, e, i) => {
+        this.sn.forEach((t, e, i) => {
             if (0 == e || i.length - 1 == e) {
-                var n = canvas_context.createLinearGradient(t.x, t.y, t.x + this.w, t.y + this.h);
-                i.length - 1 == e ? (n.addColorStop(0, "black"), n.addColorStop(1, "#8BC34A")) : (n.addColorStop(0, "#8BC34A"), n.addColorStop(1, "white")), canvas_context.fillStyle = n
-            } else canvas_context.fillStyle = "#8BC34A";
-            canvas_context.fillRect(t.x, t.y, this.w, this.h), canvas_context.strokeStyle = "#E91E63", canvas_context.font = "30px serif", canvas_context.strokeStyle = "#9E9E9E", i.length - 1 != e && 0 != e && canvas_context.strokeRect(t.x, t.y, this.w, this.h), 0 == e && (canvas_context.beginPath(), canvas_context.fillStyle = "#F44336", canvas_context.arc(t.x + 10, t.y + 2, 5, 360, 0), canvas_context.fill()), canvas_context.arc(t.x + 10, t.y + 2, 5, 360, 0), canvas_context.fill(), canvas_context.beginPath()
+                var n = c.createLinearGradient(t.x, t.y, t.x + this.w, t.y + this.h);
+                i.length - 1 == e ? (n.addColorStop(0, "black"), n.addColorStop(1, "#8BC34A")) : (n.addColorStop(0, "#8BC34A"), n.addColorStop(1, "white")), c.fillStyle = n
+            } else c.fillStyle = "#8BC34A";
+            c.fillRect(t.x, t.y, this.w, this.h), c.strokeStyle = "#E91E63", c.font = "30px serif", c.strokeStyle = "#9E9E9E", i.length - 1 != e && 0 != e && c.strokeRect(t.x, t.y, this.w, this.h), 0 == e && (c.beginPath(), c.fillStyle = "#F44336", c.arc(t.x + 10, t.y + 2, 5, 360, 0), c.fill()), c.arc(t.x + 10, t.y + 2, 5, 360, 0), c.fill(), c.beginPath()
         })
     }
 }
@@ -64,15 +64,15 @@ function food() {
 }
 
 function init() {
-    canvas_whole.height = h, canvas_whole.width = w, canvas_context.fillRect(0, 0, w, innerHeight);
+    cc.height = h, cc.width = w, c.fillRect(0, 0, w, innerHeight);
     for (var t = 0; t < 10; t++) food_array.push(new food);
     s = new snake(w / 2, h / 2, 400, 4, 4), anima()
 }
 
 function anima() {
-    canvas_context.fillStyle = "rgba(0,0,0,0.11)", canvas_context.fillRect(0, 0, canvas_whole.width, canvas_whole.height), food_array.forEach(t => t.put()), s.draw(), document.getElementById("time").innerText = timer(), setTimeout(() => {
+    c.fillStyle = "rgba(0,0,0,0.11)", c.fillRect(0, 0, cc.width, cc.height), food_array.forEach(t => t.put()), s.draw(), document.getElementById("time").innerText = timer(), setTimeout(() => {
         requestAnimationFrame(anima)
-    }, fw)
+    }, timeout_millsecond)
 }
 
 function emit(t) {
@@ -81,6 +81,8 @@ function emit(t) {
 
 var t = new Date + "",
     d = void 0,
+    cc = document.getElementsByTagName("canvas")[0],
+    c = cc.getContext("2d");
     canvas_whole = document.getElementsByTagName("canvas")[0],
     canvas_context = canvas_whole.getContext("2d"),
     key = {}, key.keydown = function (t) {
@@ -95,13 +97,13 @@ var t = new Date + "",
             }
         }), e.initKeyboardEvent ? e.initKeyboardEvent("keydown", !0, !0, document.defaultView, !1, !1, !1, !1, t, t) : e.initKeyEvent("keydown", !0, !0, document.defaultView, !1, !1, !1, !1, t, 0), e.keyCodeVal = t, e.keyCode !== t && alert("keyCode mismatch " + e.keyCode), document.dispatchEvent(e)
     };
-var o, s, h = innerHeight,
-    w = innerWidth,
-    timeout_millsecond = 50,
-    food_array = [];
-window.onkeydown = function (t) {
-    var e = t.key;
-    (e.search("Arrow") > -1 || "1" == e) && (d = t.key),
-    "i" != e && "I" != e || (console.log("inc"), timeout_millsecond -= 10), 
-    "d" != e && "D" != e || (console.log("dec"), timeout_millsecond += 10)
-}, init();
+    var o, s, h = innerHeight,
+        w = innerWidth,
+        timeout_millsecond = 50,
+        food_array = [];
+    window.onkeydown = function (t) {
+        var e = t.key;
+        (e.search("Arrow") > -1 || "1" == e) && (d = t.key),
+        "i" != e && "I" != e || (console.log("inc"), timeout_millsecond -= 10), 
+        "d" != e && "D" != e || (console.log("dec"), timeout_millsecond += 10)
+    }, init();
