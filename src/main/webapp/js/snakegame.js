@@ -10,6 +10,16 @@ function timer() {
   return minutes + " : " + seconds
 }
 
+function getInstruction() {
+  location.replace("/instruction")
+}
+
+function getRank() {
+  let username = document.getElementById("username").value
+  let score = document.getElementById("score").value
+  location.replace("/rank/" + username + "/" + score)
+}
+
 function coll(t, e) {
     return t.x < e.x + e.w && t.x + t.w > e.x && t.y < e.y + e.h && t.h + t.y > e.y
 }
