@@ -17,20 +17,22 @@
 package myapp;
 
 import java.io.IOException;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class RankServlet extends HttpServlet {
 
-  Map<String, Integer> scoreMap = new HashMap<>() {{
+  Map<String, Integer> scoreMap = new HashMap<String, Integer>() {{
     put("user1", 10);
     put("user2", 50);
   }};
   
-  List<String> scoreRank = new ArrayList<>() {{
+  List<String> scoreRank = new ArrayList<String>() {{
     add("user1");
     add("user2");
   }};
