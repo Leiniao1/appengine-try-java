@@ -58,6 +58,6 @@ public class RankServlet extends HttpServlet {
     scoreMap.put(username, score);
     
     resp.setContentType("text/plain");
-    resp.getWriter().println(rank);
+    resp.getWriter().println("Your score ranks " + (rank + 1));
   }
 }
