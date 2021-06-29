@@ -8,9 +8,17 @@
         <servlet-name>instruction</servlet-name>
         <servlet-class>myapp.DemoServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>rank</servlet-name>
+        <servlet-class>myapp.RankServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>instruction</servlet-name>
         <url-pattern>/instruction</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>rank</servlet-name>
+        <url-pattern>/rank/*</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
