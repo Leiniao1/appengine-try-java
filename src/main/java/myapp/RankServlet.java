@@ -43,8 +43,8 @@ public class RankServlet extends HttpServlet {
     String username = "defaultUser";
     int score = 0;
     String uriSuffix = req.getRequestURI().substring(1); // "/hang/100" -> "hang/100"
-    username = uriSuffix.split("/")[0];
-    score = Integer.parseInt(uriSuffix.split("/")[1]);
+    username = uriSuffix.split("/")[1];
+    score = Integer.parseInt(uriSuffix.split("/")[2]);
     int rank = 0;
     
     for (int i = 0; i < scoreRank.size(); i++) {
