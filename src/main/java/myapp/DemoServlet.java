@@ -29,8 +29,8 @@ public class DemoServlet extends HttpServlet {
     resp.getWriter().println(
       "This is a Snake Game.\n" + 
       "To play it: \n" +
-      "1. Press any key on your keyboard to start;" + 
-      "2. Press Up/Down/Left/Right to direct the snake;" + 
-      "3. Direct the snake to clash with food on the screen to get score;");
+      "1. Press any key on your keyboard to start;\n" + 
+      "2. Press Up/Down/Left/Right to direct the snake;\n" + 
+      "3. Direct the snake to clash with food on the screen to get score;\n");
   }
 }
