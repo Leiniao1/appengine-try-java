@@ -50,10 +50,12 @@ public class RankServlet extends HttpServlet {
     for (int i = 0; i < scoreRank.size(); i++) {
       if (score < scoreMap.get(scoreRank.get(i))) {
         rank = i;
-        scoreRank.add(i, username);
-        scoreMap.put(username, score);
+      } else if (i == scoreRank.size() - 1) {
+        rank = i + 1;
       }
     }
+    scoreRank.add(rank, username);
+    scoreMap.put(username, score);
     
     resp.setContentType("text/plain");
     resp.getWriter().println(rank);
