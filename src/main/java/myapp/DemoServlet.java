@@ -26,6 +26,11 @@ public class DemoServlet extends HttpServlet {
   public void doGet(HttpServletRequest req, HttpServletResponse resp)
       throws IOException {
     resp.setContentType("text/plain");
-    resp.getWriter().println("{ \"name\": \"World\" }");
+    resp.getWriter().println(
+      "This is a Snake Game.\n" + 
+      "To play it: \n" +
+      "1. Press any key on your keyboard to start;" + 
+      "2. Press Up/Down/Left/Right to direct the snake;" + 
+      "3. Direct the snake to clash with food on the screen to get score;");
   }
 }
