@@ -16,7 +16,7 @@ function getInstruction() {
 
 function getRank() {
   let username = document.getElementById("username").value
-  let score = document.getElementById("score").value
+  let score = document.getElementById("score").innerText
   location.replace("/rank/" + username + "/" + score)
 }
 
